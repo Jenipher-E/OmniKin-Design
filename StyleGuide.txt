@@ -1,0 +1,258 @@
+OmniKin
+Style Guide
+Colour system · Typography · Application rules
+The single source of truth for how OmniKin looks and reads — across the product UI, marketing, and documents. One palette, one type system, applied consistently so that “privacy-first, all-in-one, trustworthy” is felt before it is read.
+How to use this guide.  Every visual decision maps to a named token (e.g. Teal 700) with a fixed hex value. Always reference the token, never a one-off colour. The anchor of the whole system is the brand teal #1C6E78, used for the title and primary brand expression throughout.
+[Heading1] 1.  Brand essence
+OmniKin is a calm, trustworthy household operating system. The visual language has three jobs: feel safe (privacy is the brand), feel unified (one app, not a patchwork), and feel inclusive (as at home in Lagos or Nairobi as in Berlin or Paris).
+[ListParagraph] Calm & trustworthy:  deep teals, generous white space, no visual clutter, no ad-style noise.
+[ListParagraph] Unified:  one consistent palette and type scale across all fourteen features and every surface.
+[ListParagraph] Inclusive & light:  high-contrast, legible type and lightweight assets that work on low-end devices and small screens.
+[Heading1] 2.  Major brand colours
+OmniKin has three brand colours. These are the identity of the product — used for the logo, website and all branding. Everything in the wider palette (section 3) is built around and in service of these three.
+1 · PRIMARY
+Teal 700
+#1C6E78
+2 · SECONDARY
+Coral
+#E2683C
+3 · SECONDARY
+Cornflower Blue
+#2E5A87
+1.  Teal 700 — #1C6E78  (primary, dominant).  The dominant brand colour and the foundation of the identity — logo, primary surfaces and the document/screen title. Its full tonal range (Teal 900–100, listed in section 3.1) extends this one colour across the whole product.
+2.  Coral — #E2683C  (secondary, used sparingly).  The warm secondary that brings energy and human warmth. Reserved for the primary call-to-action and key highlights — deliberately rare so it always signals “act here”.
+3.  Cornflower Blue — #2E5A87  (secondary, sub-headers).  The cool secondary (Google Docs: “Dark cornflower blue 3”). Its defined role is sub-headers — H2 sub-headings throughout the product and documents — giving a clear teal-to-blue step down the heading hierarchy.
+[Heading1] 3.  Colour palette
+The palette is a teal-anchored tonal system plus a warm accent, a differentiator green, neutrals, and functional colours. Use tokens, not ad-hoc hex values.
+[Heading2] 3.1  Core brand — teal ramp
+The teal ramp carries the brand. Teal 700 is the anchor (titles and logo); darker tones add depth for headings and dark surfaces; lighter tones and tints handle borders, fills and backgrounds.
+Swatch
+Token
+Hex
+Where it is used
+#0E3A40
+Teal 900 / Ink-teal
+#0E3A40
+Darkest surfaces, footers on dark, deep contrast text.
+#14525B
+Teal 800 / Deep
+#14525B
+Dark UI bars, deep contrast surfaces, strong emphasis on light backgrounds.
+#1C6E78
+Teal 700 / Primary  ★
+#1C6E78
+Brand anchor: document & screen titles (H1), logo, primary buttons.
+#2A8C99
+Teal 500 / Interactive
+#2A8C99
+Links, secondary buttons, active icons, selected states.
+#74B7C0
+Teal 300 / Light
+#74B7C0
+Hover states, dividers on teal, chart secondary, illustration.
+#E4F0F1
+Teal 100 / Tint
+#E4F0F1
+Table header fills (light variant), info panels, section backgrounds.
+Figure 1. The teal ramp. Teal 700 (#1C6E78) is the immovable anchor; the rest are derived tones for hierarchy and surface.
+[Heading2] 3.2  Accents & secondary brand
+Two of OmniKin’s three brand colours live here. Warm coral is the secondary accent — the call-to-action and highlight colour. Cornflower blue is the secondary sub-header colour. Differentiator green flags where OmniKin beats incumbents and doubles as the success state.
+Swatch
+Token
+Hex
+Where it is used
+#E2683C
+Coral / Accent  ★
+#E2683C
+Brand secondary. Primary call-to-action, key highlights, “new” / attention markers. Use sparingly.
+#FBE7DD
+Coral 100 / Tint
+#FBE7DD
+CTA hover wash, highlight panel backgrounds.
+#2E5A87
+Cornflower Blue / Sub-head  ★
+#2E5A87
+Brand secondary. Sub-headings (H2) across product and documents; secondary section labels.
+#E6EDF3
+Blue 100 / Tint
+#E6EDF3
+Sub-section background bands, quiet info panels under a blue sub-head.
+#2E8C5A
+Green / Differentiator
+#2E8C5A
+Differentiator badges (★), success states, positive confirmations.
+#E1F1E7
+Green 100 / Tint
+#E1F1E7
+Differentiator badge background, success-panel fill.
+★ DIFFERENTIATOR  Green badge — used to flag where OmniKin diverges from competitors. Green #2E8C5A on a pale green #E1F1E7 panel with a 3pt green left border.
+Figure 2. The differentiator badge, rebuilt from the tokens above — the same pattern used throughout the Feature Specification.
+[Heading2] 3.3  Neutrals
+Neutrals carry text and structure. They are warmed very slightly toward teal so nothing on the page feels cold or detached from the brand.
+Swatch
+Token
+Hex
+Where it is used
+#1E2A2D
+Ink / Body
+#1E2A2D
+Default body text, primary labels, icons on light surfaces.
+#586A6D
+Slate / Secondary
+#586A6D
+Secondary text, lead paragraphs, captions, helper text.
+#8A999B
+Muted / Tertiary
+#8A999B
+Disabled text, placeholders, footer meta, fine print.
+#DCE5E6
+Hairline / Border
+#DCE5E6
+Dividers, table borders, input outlines, card edges.
+#F6FAFA
+Canvas / Off-white
+#F6FAFA
+App background, alternating table rows, resting surfaces.
+#FFFFFF
+Surface / White
+#FFFFFF
+Cards, sheets, primary content surface, page background.
+[Heading2] 3.4  Functional colours
+Reserved strictly for system feedback so meaning stays unambiguous. Never use functional colours decoratively.
+Swatch
+Token
+Hex
+Where it is used
+#2E8C5A
+Success
+#2E8C5A
+Completed, confirmed, saved, online (shares the differentiator green).
+#E0A53C
+Warning
+#E0A53C
+Needs attention, expiring document, allergy/dietary flag, quota near limit.
+#C9453B
+Error / Destructive
+#C9453B
+Failed action, validation error, destructive confirm (delete).
+#2A8C99
+Info
+#2A8C99
+Neutral information, tips, offline/cached notices (reuses Teal 500).
+[Heading1] 4.  Colour application map
+The fixed rule set. When in doubt, this table wins — the same element is always the same token.
+Element
+Token
+Value
+Document / screen title (H1)
+Teal 700
+#1C6E78
+Sub-heading (H2)
+Cornflower Blue
+#2E5A87
+Minor heading (H3) / labels
+Slate
+#586A6D
+Body text
+Ink
+#1E2A2D
+Secondary / lead text & captions
+Slate
+#586A6D
+Primary button (fill)
+Teal 700
+white text
+Primary CTA (fill)
+Coral
+white text
+Secondary button / link
+Teal 500
+#2A8C99
+Table / section header fill
+Teal 700 (or Teal 100)
+#E4F0F1
+Differentiator badge
+Green on Green 100
+#2E8C5A
+Divider / border / input outline
+Hairline
+#DCE5E6
+App / page background
+Canvas or White
+#F6FAFA
+Figure 3. Element-to-token map. This is the part most teams reach for daily.
+[Heading1] 5.  Typography
+One typeface family does everything. Clear hierarchy comes from size and weight, not from switching fonts.
+[Heading2] 5.1  Typefaces
+[ListParagraph] Product UI (primary):  Inter. Chosen for excellent small-size legibility, a low-bandwidth variable-font build, broad language coverage (including the Latin set behind Swahili and other localisations) and tabular figures for expense tracking. Stack: Inter, “Segoe UI”, Roboto, system-ui, Arial, sans-serif.
+[ListParagraph] Documents (Word / Google Docs):  Arial as the rendering-safe equivalent of Inter, so reports and specs match the product without font-substitution surprises. Calibri is an acceptable fallback.
+[ListParagraph] Monospace (codes & data):  Roboto Mono / system monospace for OTPs, IDs, hex values and anything that must align by character.
+Default character style: sentence case for everything except the wordmark; left-aligned; never justified. Default body line-height is 1.5; headings 1.2–1.3. Em dashes ( — ) and true smart quotes ( “ ” ‘ ’ ) throughout.
+[Heading2] 5.2  Type scale & roles
+Document point sizes are shown first, with the equivalent product-UI pixel size in brackets. Weights map to Inter / Arial weights.
+Role
+Font · Weight
+Size (doc / UI)
+Colour
+Display / cover title
+Inter / Arial · Bold
+28 pt (32 px)
+Teal 700
+H1 — section title
+Bold
+20–22 pt (24–28 px)
+Teal 700
+H2 — sub-heading
+Bold / Semibold
+16 pt (20 px)
+Cornflower Blue
+H3 — minor heading
+Semibold
+13 pt (16 px)
+Slate
+Lead / intro paragraph
+Regular
+12.5 pt (18 px)
+Slate
+Body
+Regular
+11 pt (16 px)
+Ink
+Button / UI label
+Semibold
+10.5 pt (14 px)
+White on fill
+Caption / figure label
+Italic
+9 pt (13 px)
+Slate
+Fine print / meta
+Regular
+8 pt (12 px)
+Muted
+Figure 4. The type scale. Hierarchy is driven by size, weight and colour — the family never changes.
+[Heading2] 5.3  Specimen
+The roles above, rendered:
+Cover / Display   OmniKin
+H1   A shared family calendar
+H2   Out-of-stock intelligence
+Lead   One place that keeps the whole household on the same page.
+Body   Each household is a private shared space members join with role-appropriate access.
+Link   View privacy dashboard
+Caption   Figure 5. Privacy-scoped event visibility.
+[Heading1] 6.  Default text & component styles
+The baseline rules every screen and document inherits unless a role above overrides them.
+[ListParagraph] Default paragraph:  Arial / Inter Regular, 11 pt (16 px), Ink #1E2A2D, line-height 1.5, left-aligned, 8–10 pt space after. No first-line indents.
+[ListParagraph] Emphasis:  bold uses Ink or Teal 800 for lead-in labels; italics for captions and figure references only. Never underline for emphasis — underline means link.
+[ListParagraph] Links:  Teal 500 #2A8C99, underline on hover/press; visited links keep the same colour (no purple).
+[ListParagraph] Lists:  teal bullet glyph, 0.25” hanging indent; numbered lists use the same indent with a period.
+[ListParagraph] Inputs:  white fill, Hairline #DCE5E6 1px border, Teal 500 focus ring, Error #C9453B for invalid state with a message in the same colour.
+[ListParagraph] Cards & panels:  white surface on Canvas background, Hairline border, 8–12 px radius, soft shadow; section/info panels use Teal 100 fill.
+[ListParagraph] Tables:  Teal 700 header with white text (or Teal 100 for a lighter look), Hairline cell borders, Canvas zebra striping, 8/14 px cell padding.
+[Heading1] 7.  Accessibility & guardrails
+[ListParagraph] Maintain WCAG AA contrast: Teal 700, Teal 800, Cornflower Blue, Ink, Coral, Green and Error all clear AA for normal text on white (Cornflower Blue ≈ 7:1). Teal 300, Teal 100 and Muted are for large text, borders or fills only — never body text.
+[ListParagraph] Never rely on colour alone to carry meaning — pair functional colours with an icon or label (important for accessibility and for printed / low-colour devices).
+[ListParagraph] Keep Coral rare: it loses its “act now” power if it appears more than once or twice per screen.
+[ListParagraph] No ad-style visual noise, no gradients on text, no more than two decorative accent colours in one view (Cornflower Blue is structural for sub-heads, not a decorative accent) — restraint is the brand.
+[ListParagraph] Assets stay lightweight (SVG icons, variable fonts, compressed images) so the system performs on low-end devices, in line with the African-market strategy.
+One palette. One type system. Applied the same way every time — that consistency is what makes OmniKin read as trustworthy.

@@ -1,0 +1,450 @@
+OmniKin
+The all-in-one family organiser
+Product Requirements Document
+Feature 1 — Login & Account Creation
+Account creation · Credentials · SSO & biometrics · Recovery · Sessions
+Target markets: European Union & Africa     |     Model: Freemium → subscription     |     Stage: New concept
+[Heading3] Document control
+Field
+Detail
+Document
+OmniKin PRD — Feature 1: Login & Account Creation
+Owner
+Product Management (OmniKin)
+Status
+Draft for review
+Version
+1.0
+Last updated
+5 June 2026
+Source spec
+OmniKin Feature Specification — Feature 1 (Epics 1.1–1.4)
+Related
+OmniKin Strategic Market Analysis; OmniKin Style Guide v1.0; Feature 2 (Roles & Permissions); Feature 14 (Data Privacy & Compliance)
+[Heading3] Changelog
+Version
+Date
+Author
+Change
+1.0
+5 Jun 2026
+Product
+Initial PRD for Feature 1, derived from the Feature Specification and aligned to the Strategic Analysis.
+Move the changelog to the top of the document once edits begin; notify all contributors on every change.
+[Heading1] Contents
+[Heading1] Problem Alignment
+[Heading2] Problem & Opportunity
+Families entering OmniKin must pass through one front door — and that door has to be effortless enough for a time-poor parent to set up in under two minutes, yet strong enough to protect a store of calendars, documents, locations and children’s data. Today no family organiser does both well; that gap is the opportunity.
+Authentication is not a convenience layer for OmniKin — it is the first line of legal and reputational defence and the architectural foundation for everything the product promises. Because every household member (including children) authenticates with their own credential rather than a shared family password, login is what makes per-member roles, age-appropriate access, GDPR-K consent and a clean audit trail possible at all. Get the front door right and the privacy-by-design wedge that differentiates OmniKin becomes real; get it wrong and the whole proposition collapses.
+[Heading3] Why does this matter to our customers and business?
+[ListParagraph] Customers — a parent wants to start using OmniKin immediately, without wrestling with a sign-up flow; once in, they need confidence that the family’s private data is genuinely protected and that each member — adult or child — has the right level of access.
+[ListParagraph] Business — login is the top of the activation funnel (drop-off here caps every downstream metric) and the gate on regulatory exposure. Individual credentials unlock the privacy-first positioning that is OmniKin’s sharpest competitive advantage against ad-funded incumbents.
+[Heading3] What evidence or insights support this?
+[ListParagraph] The category leader, Cozi (12M+ families), uses a single shared household password — which makes per-member permissions, child-data consent and audit logging effectively impossible. This is a structural weakness OmniKin can convert into a differentiator.
+[ListParagraph] The EU market is governed by the GDPR (age of valid consent 13–16 by member state) and the Digital Services Act’s July 2025 minor-protection guidelines; regulators have shown teeth (TikTok fined €345M over children’s data). African markets add NDPA (Nigeria), DPA (Kenya) and POPIA (South Africa).
+[ListParagraph] Sub-Saharan Africa is mobile-first and connectivity is intermittent and costly; phone-number sign-in and offline-tolerant sessions are a reach requirement, not a nicety. Incumbents (Cozi, FamilyWall, Maple) assume reliable connectivity and email-first sign-up.
+[ListParagraph] 57.8% of EU households have all adults in employment — the time-poor segment for whom a sub-two-minute setup is decisive.
+[Heading3] Which customers are we working with / hearing from?
+[ListParagraph] Anna (EU, Germany) — 38, marketing manager, two school-age children; juggling four apps and willing to pay ~€4/mo for one shared space. Wants a one-tap, no-new-password start.
+[ListParagraph] Grace (Africa, Kenya) — 34, shopkeeper, extended household of six including her mother; on a low-end phone with intermittent, costly data. Needs phone-number sign-in, Swahili, and reliable access through connectivity gaps.
+[ListParagraph] Marco (EU co-parent) — 45, separated, children across two homes; needs a neutral shared space and a trustworthy document vault, which depends on per-member identity and strong recovery.
+[Heading3] Why now? Why is it urgent and important?
+[ListParagraph] A wave of AI-first entrants (Nori, Fami, Maple, FamilyHero) is launching with low barriers to entry; being first to own secure, per-member, privacy-first onboarding builds switching costs early.
+[ListParagraph] DSA minor-protection guidelines (July 2025) and active GDPR enforcement make privacy-by-design at the authentication layer time-sensitive — it cannot be retrofitted after child data is already processed.
+[ListParagraph] Login is a prerequisite for every other feature in the backlog; it must land first and land solidly.
+Competitive context
+Cozi — the 12M-family incumbent — uses a single shared household account with one shared family password that everyone types in, which makes per-member permissions, child-data consent and audit logging effectively impossible. FamilyWall and Maple offer individual accounts but remain developed-market-focused with no offline or phone-first sign-in. OmniKin’s opportunity is to make secure, per-member, privacy-first authentication the default — and to make it work on a low-end Android phone with patchy data.
+[Heading2] Assumptions & Hypothesis
+[Heading3] Assumptions
+[ListParagraph] Parents will accept a slightly longer initial setup (per-member identity) in exchange for clear privacy and child-protection benefits, provided the owner flow itself stays under ~2 minutes.
+[ListParagraph] A meaningful share of African target users have no email and will rely on phone-number-plus-OTP as a first-class sign-in path.
+[ListParagraph] Google and Apple SSO cover the majority of EU device owners and materially reduce sign-up friction and password-reset load.
+[ListParagraph] Users will tolerate step-up checks (biometric/passcode) on sensitive areas (Documents, Settings) as a sign of trustworthiness rather than friction.
+[ListParagraph] Platform biometric APIs (Face ID, fingerprint) are available on the majority of target devices for returning-user convenience.
+[Heading3] Hypotheses
+[ListParagraph] H1 — If account creation completes in under two minutes with inline validation and SSO, then sign-up completion rate will exceed an internal benchmark (target ≥ 85% of starts).
+[ListParagraph] H2 — If every member has an individual credential, then we can deliver per-member roles, GDPR-K consent and a complete audit trail — capabilities Cozi cannot offer — increasing trust and retention.
+[ListParagraph] H3 — If phone-first, offline-tolerant, low-data sign-in is treated as core, then activation and retention in African pilots will materially exceed an email-only baseline.
+[Heading2] High Level Approach
+Squint, and the shape is: a single adaptive front door that creates a private household, gives every member their own credential, and meets each user on the connectivity and identity terms they actually have — email and SSO in Berlin, phone-and-OTP and cached sessions in Nairobi — while hashing secrets, minimising scopes, and stepping up authentication around the most sensitive data.
+Concretely, the approach spans four coherent slices, delivered as the four epics below: (1.1) household & account creation with strong-but-friendly credential setup and contact verification; (1.2) flexible sign-in via password, Google/Apple SSO and platform biometrics, with optional MFA; (1.3) self-service recovery and session/device management; and (1.4) the differentiated layer — individual per-member credentials and low-bandwidth, phone-first, offline-tolerant access for emerging markets.
+[Heading3] Alternatives considered
+Option
+Why not chosen
+Single shared household password (Cozi model)
+Structurally prevents per-member roles, child-data consent and audit logging — the exact capabilities that are OmniKin’s differentiator and a regulatory requirement under GDPR-K.
+Email-only sign-up (FamilyWall / Maple model)
+Excludes a large share of African target users who have no email; undermines the emerging-market reach that is the second strategic pillar.
+SSO-only (no password option)
+Leaves out users without Google/Apple accounts and low-end-device users; creates lock-in and a single point of failure for recovery.
+Defer MFA and session management to a later release
+These are cheap to design in now and expensive to retrofit; the data sensitivity (documents, children, location) warrants step-up security from day one.
+[Heading2] Narrative
+Anna downloads OmniKin on her commute. She taps “Continue with Google”, names the household “Reuter Family”, and is in — Owner of a private space — before her train reaches the next stop. She adds her partner and two children; each gets their own login, and the children inherit age-appropriate defaults automatically. Later that week she switches phones, signs in once, and enables Face ID; the document vault still asks for a fresh check when she opens it, which quietly reassures her.
+In Nairobi, Grace has no email and a patchy connection. She signs up with her phone number, receives a six-digit code, and chooses a name and avatar colour. When the network drops at the market, OmniKin still opens to her household in a clearly-labelled cached state; her sign-in never round-trips more data than it must, so it barely touches her bundle. The interface is in Swahili. Her mother joins on an even older handset and it works the same way.
+Marco forgets which email he used. Rather than hitting a dead end, he recovers through his linked phone number; the reset signs out his other sessions and notifies him, so he knows it was him. None of these three share a password — every action in the household is attributable, and that is exactly what makes the shared space feel safe.
+[Heading2] Goals
+In rough priority order. Targets are directional placeholders for refinement with data, design and engineering, not final commitments.
+#
+Goal
+Type
+Measure / target
+1
+Effortless first-time setup for the household owner
+Measurable
+Owner account creation completes in < 2 min (median); sign-up completion ≥ 85% of starts.
+2
+Secure-by-default credentials and data protection
+Measurable
+100% of passwords hashed (Argon2id/bcrypt); 0 plaintext secrets; breached-password rejection enabled.
+3
+Per-member individual identity for every member
+Measurable
+0 shared household passwords in the product; 100% of in-app actions attributable to an individual.
+4
+Phone-first, offline-tolerant reach for emerging markets
+Measurable
+Phone+OTP sign-in is a first-class path; app opens to a usable cached state with no network round-trip.
+5
+Reliable self-service recovery (low support load)
+Measurable
+≥ 95% of password resets self-served; support-assisted recovery < 2% of attempts.
+6
+Users feel the product is trustworthy and private
+Feeling
+Qualitative: setup feels safe, not intrusive; step-up checks read as care, not friction (research/surveys).
+[Heading3] Guardrail metrics
+[ListParagraph] Account-enumeration leakage: zero — generic error/response messaging verified across sign-in, reset and recovery.
+[ListParagraph] Abuse: account-creation and OTP/SMS request rates stay within configured limits; no legitimate user is blocked by a CAPTCHA unless risk signals are high.
+[ListParagraph] Authentication availability and OTP/SSO success rate stay above target; added security must not raise sign-in failure rate beyond an agreed ceiling.
+[ListParagraph] Lockout safety: no account is ever permanently locked without a working recovery path.
+[ListParagraph] Data cost (Africa): authentication payload size per sign-in stays under an agreed byte budget; assets are not re-downloaded each sign-in.
+[Heading2] Non-goals
+Non-goal
+Why it is out of scope for Feature 1
+Roles & granular permissions model
+Owned by Feature 2 (Household Access). Feature 1 provisions individual identities and the Owner role; the full permission matrix is defined elsewhere.
+Full consent, lawful-basis & children’s-protection engine
+Owned by Feature 14 (Data Privacy & Compliance). Feature 1 enforces that child accounts are parent-provisioned and inherit GDPR-K defaults, but the compliance engine itself is separate.
+Member invitations & household membership lifecycle
+Invite/accept/leave flows belong to Feature 2. Feature 1 covers creating the household and the owning account, and the constraint that members have individual credentials.
+In-app billing & subscription management
+Owned by Feature 13 (Settings → billing). Login gates access but does not handle payment.
+Enterprise / SAML / directory SSO
+Consumer Google & Apple SSO only at launch; enterprise identity providers are not a near-term need for households.
+Mobile-money payment integration
+A differentiator for the Expense feature, not authentication; out of scope here.
+[Heading1] Solution Alignment
+[Heading2] Key Features & Functional requirements
+Plan of record. The solution space is drawn by four epics covering the full credential lifecycle. Stories are grouped under their epic with a user-voice statement, a stated prerequisite, and acceptance criteria tagged Functional (what it must do), Validation (rules and checks on input/behaviour), and Guardrail (safety, privacy, abuse and compliance limits). Epic 1.4 carries the differentiators.
+Epic
+Slice of the journey
+Stories
+1.1
+Household & account creation
+US-1.1.1 – US-1.1.4
+1.2
+Sign-in, SSO & biometrics
+US-1.2.1 – US-1.2.4
+1.3
+Recovery & session management
+US-1.3.1 – US-1.3.3
+1.4 ★
+Differentiated access (privacy & reach)
+US-1.4.1 – US-1.4.2
+[Heading3] Epic 1.1 — Household & account creation
+US-1.1.1  Create a household and owner account
+As a parent setting up OmniKin for the first time, I want to create a household and become its owner, so that I have a private shared space my family can join.
+Prerequisite: User has installed the app or opened the web app and has no existing account; a verified email address or mobile number is available.
+Acceptance criteria
+[ListParagraph] Given a new user on the sign-up screen, when they enter a household name, their email or phone, and a password and tap “Create household”, then an account is created and they are designated the household Owner.
+[ListParagraph] Functional: The household name is stored as an editable attribute and shown on the home space; the creator is assigned the Owner role with full administrative rights.
+[ListParagraph] Validation: Household name is 2–60 characters; leading/trailing whitespace is trimmed; emoji and control characters are rejected with an inline message.
+[ListParagraph] Validation: Email must match RFC 5322 format or, where a phone number is used, E.164 format; the field shows inline validation before submission is enabled.
+[ListParagraph] Guardrail: A single email/phone may own at most a configurable number of households (default 3) to deter automated abuse; exceeding it shows a clear error rather than failing silently.
+[ListParagraph] Guardrail: Account creation is rate-limited per device/IP and protected by an invisible bot-check that never blocks a legitimate user with a CAPTCHA challenge unless risk signals are high.
+US-1.1.2  Set a personal display name / username
+As a new account holder, I want to choose a display name, so that other household members recognise me and my colour-coded items are attributed correctly.
+Prerequisite: User has an account in creation flow or is editing their profile.
+Acceptance criteria
+[ListParagraph] Given the profile step, when the user enters a display name, then it is saved and used across calendar, lists, messaging and agenda attributions.
+[ListParagraph] Validation: Display name is 1–40 characters; duplicate names within the same household are allowed but the UI appends a disambiguator (e.g. “Alex (2)”) for clarity.
+[ListParagraph] Functional: The user may pick an avatar colour from the household palette; the system prevents two members holding the identical colour to keep the calendar legible.
+[ListParagraph] Guardrail: Profanity and impersonation of the Owner role label (e.g. “Admin”, “OmniKin”) are blocked by a denylist.
+US-1.1.3  Enforce password strength at creation
+As a security-conscious user, I want the app to require a strong password, so that my family’s data is not exposed by a weak credential.
+Prerequisite: User is on a screen that sets or changes a password.
+Acceptance criteria
+[ListParagraph] Validation: Password is a minimum of 10 characters and is checked against a breached-password list; common and previously-breached passwords are rejected.
+[ListParagraph] Functional: A real-time strength meter and specific, actionable guidance (not just “weak”) are shown as the user types.
+[ListParagraph] Guardrail: Passwords are never stored in plain text; they are hashed with a modern, salted algorithm (e.g. Argon2id/bcrypt) server-side.
+[ListParagraph] Guardrail: The password field offers a show/hide toggle and never disables paste, so password managers work.
+[ListParagraph] Validation: Confirm-password must match before submission is enabled.
+US-1.1.4  Verify email or phone before activation
+As a new user, I want to confirm my email or phone number, so that account recovery is reliable and the address is genuinely mine.
+Prerequisite: Account has been created with an unverified email or phone.
+Acceptance criteria
+[ListParagraph] Given an unverified contact, when the account is created, then a one-time code (OTP) or magic link is sent and a verification screen is shown.
+[ListParagraph] Validation: OTP is 6 digits, expires after 10 minutes, and is single-use; expired or reused codes show a clear “request a new code” action.
+[ListParagraph] Guardrail: A maximum of 5 OTP requests per hour per contact; further requests are throttled with an explanatory message.
+[ListParagraph] Functional: Unverified accounts can browse a limited onboarding state but cannot invite members or store documents until verified.
+[Heading3] Epic 1.2 — Sign-in, SSO & biometrics
+US-1.2.1  Sign in with email/phone and password
+As a returning member, I want to sign in with my credential, so that I can reach my household quickly.
+Prerequisite: User has a verified account and is signed out.
+Acceptance criteria
+[ListParagraph] Given valid credentials, when the user submits, then they are authenticated and routed to their household home space.
+[ListParagraph] Validation: Invalid credentials return a single generic message (“Email/phone or password is incorrect”) that never reveals which field was wrong, to avoid account enumeration.
+[ListParagraph] Guardrail: After 5 consecutive failed attempts, progressive rate-limiting and an optional step-up check are applied; the account is never permanently locked without a recovery path.
+[ListParagraph] Functional: A “keep me signed in on this device” option issues a longer-lived, revocable refresh token.
+US-1.2.2  Sign up / sign in with SSO (Google, Apple)
+As a user who prefers not to manage another password, I want to use Google or Apple sign-in, so that onboarding is one tap.
+Prerequisite: Device has a Google/Apple account; provider SDK is configured.
+Acceptance criteria
+[ListParagraph] Given the SSO option, when the user authorises with the provider, then OmniKin creates or links an account using the verified provider email.
+[ListParagraph] Functional: If the provider email already matches an OmniKin account, the flows are linked rather than duplicated, after explicit user confirmation.
+[ListParagraph] Guardrail: OmniKin requests the minimum scope (identity + email only); it never requests contacts, calendar or drive scopes at sign-in.
+[ListParagraph] Validation: Apple’s “hide my email” relay addresses are fully supported for recovery and notifications.
+[ListParagraph] Functional: Apple sign-in is offered on iOS to comply with App Store policy where third-party SSO is present.
+US-1.2.3  Enable biometric / device unlock
+As a member on a personal device, I want to unlock OmniKin with Face ID or a fingerprint, so that re-entry is fast but still secure.
+Prerequisite: User has signed in at least once on a device that supports platform biometrics.
+Acceptance criteria
+[ListParagraph] Given a successful first sign-in, when the user opts in, then subsequent app opens may be unlocked biometrically.
+[ListParagraph] Guardrail: Biometrics unlock a locally stored, encrypted session token; the raw password is never stored on the device.
+[ListParagraph] Functional: A passcode/password fallback is always available if biometrics fail.
+[ListParagraph] Guardrail: Accessing the Document Organiser or Settings requires a fresh biometric/passcode check even within an active session (step-up).
+US-1.2.4  Step up to multi-factor authentication (MFA)
+As a household owner, I want to add a second factor, so that a leaked password alone cannot compromise our family data.
+Prerequisite: User has a verified account.
+Acceptance criteria
+[ListParagraph] Functional: Users can enrol a TOTP authenticator app or SMS/voice OTP; at least one app-based factor is offered so SMS is not the only option.
+[ListParagraph] Guardrail: MFA is strongly encouraged for the Owner role and required before any bulk data export.
+[ListParagraph] Functional: Enrolment generates one-time backup recovery codes the user is prompted to save.
+[ListParagraph] Validation: SMS OTP is throttled and reuse-protected identically to email OTP.
+[Heading3] Epic 1.3 — Recovery & session management
+US-1.3.1  Reset a forgotten password
+As a user who has forgotten my password, I want to reset it securely, so that I regain access without contacting support.
+Prerequisite: User knows the email/phone associated with the account.
+Acceptance criteria
+[ListParagraph] Given the “Forgot password” link, when the user submits their contact, then a time-limited, single-use reset link/OTP is sent.
+[ListParagraph] Guardrail: The response message is identical whether or not the contact exists, preventing account enumeration.
+[ListParagraph] Validation: Reset links expire after 30 minutes and are invalidated once used or once a newer one is issued.
+[ListParagraph] Guardrail: Completing a reset signs out all other sessions and notifies the account contact that a reset occurred.
+US-1.3.2  Recover a forgotten account / email
+As a user who cannot remember which email I signed up with, I want a recovery path, so that I am not locked out permanently.
+Prerequisite: User has access to a phone number or SSO provider previously linked to the account.
+Acceptance criteria
+[ListParagraph] Functional: Users can attempt recovery via a linked phone number or linked SSO provider.
+[ListParagraph] Guardrail: Recovery never lists existing accounts to the requester; it only sends a link to a verified, already-linked contact.
+[ListParagraph] Functional: If no verified contact can be reached, the user is routed to a manual identity-verification support flow rather than a dead end.
+US-1.3.3  View and revoke active sessions and devices
+As a security-aware member, I want to see where I’m signed in and sign out remotely, so that I can cut off a lost or shared device.
+Prerequisite: User is signed in.
+Acceptance criteria
+[ListParagraph] Functional: A Security screen lists active sessions with device type, approximate location and last-active time.
+[ListParagraph] Functional: The user can revoke any individual session or “sign out everywhere”.
+[ListParagraph] Guardrail: Revoking a session immediately invalidates its refresh token server-side, not just locally.
+[ListParagraph] Validation: The current session is clearly labelled and cannot be accidentally revoked without confirmation.
+[Heading3] Epic 1.4 — Differentiated access (privacy & reach)
+US-1.4.1  Per-member individual credentials (no shared household password)
+As a parent, I want each family member to have their own login, so that roles, children’s protections and an audit trail actually work.
+Prerequisite: Household exists; Owner is inviting members.
+Acceptance criteria
+[ListParagraph] Functional: Every member — including children — has a distinct credential and identity; there is no single shared household password anywhere in the product.
+[ListParagraph] Functional: Actions across the app (who edited the list, who added the event) are attributable to the individual member.
+[ListParagraph] Guardrail: Children’s accounts are provisioned by a parent/guardian and inherit GDPR-K-compliant defaults (see Feature 14).
+[ListParagraph] Validation: An Owner cannot disable per-member identity to “simplify” login, because doing so would break consent and audit guarantees.
+★  DIFFERENTIATOR
+vs Cozi — Cozi shares one family password across all members, which prevents per-member roles, child-data consent and audit logging. OmniKin’s individual credentials are a privacy-by-design prerequisite.
+US-1.4.2  Low-bandwidth & cached-session sign-in for emerging markets
+As a member on a low-end phone with intermittent, costly data, I want to sign in and stay signed in reliably, so that connectivity gaps never lock me out of my household.
+Prerequisite: User has authenticated successfully at least once on the device.
+Acceptance criteria
+[ListParagraph] Functional: After first sign-in, an encrypted, revocable session is cached so the app opens to a usable (read-only if needed) state without a network round-trip.
+[ListParagraph] Functional: Phone-number-plus-OTP sign-in is a first-class path, not a fallback, for users without email.
+[ListParagraph] Guardrail: The authentication payload is minimised and compressed to reduce data cost; assets are not re-downloaded on each sign-in.
+[ListParagraph] Validation: When offline, the app states clearly that it is showing cached data and queues any credential change until connectivity returns.
+[ListParagraph] Functional: The login UI is fully localised, including right-to-left readiness and local languages such as Swahili.
+★  DIFFERENTIATOR
+vs Cozi / FamilyWall / Maple — all assume reliable connectivity and email-first sign-up. OmniKin treats phone-first, offline-tolerant, low-data authentication as a core requirement for African market reach.
+[Heading3] Illustrative use cases — common & edge
+[ListParagraph] Common — Anna creates the household with Google SSO in under two minutes, then provisions individual logins for her partner and two children.
+[ListParagraph] Common — Grace signs up by phone number, verifies a 6-digit OTP, and continues to use OmniKin in a cached state when the network drops.
+[ListParagraph] Edge — A user reaches the 3-household ownership cap and sees a clear explanatory error rather than a silent failure.
+[ListParagraph] Edge — An SSO provider email already exists as a password account; the user is asked to confirm linking rather than creating a duplicate.
+[ListParagraph] Edge — A member loses their phone; from another device they “sign out everywhere”, immediately invalidating the lost device’s refresh token.
+[ListParagraph] Edge — A user with an Apple “hide my email” relay address resets a password and receives notifications correctly via the relay.
+[ListParagraph] Edge — Repeated OTP requests hit the 5/hour limit and are throttled with a clear message rather than failing silently.
+[Heading2] Future considerations
+[ListParagraph] Passkeys / WebAuthn passwordless sign-in as platform support matures (reduces password-reset load and phishing risk).
+[ListParagraph] Additional SSO providers and regional identity options as markets expand beyond the EU beachhead.
+[ListParagraph] Risk-based adaptive authentication (device reputation, geo-velocity) to tune step-up challenges.
+[ListParagraph] Account-recovery delegation to a trusted household member (“recovery contact”).
+[ListParagraph] Deeper mobile-network integration for African markets (e.g. silent network-based phone verification) to cut OTP cost further.
+Listed to inform — not commit — how we build now; several influence the data model and should be designed-around early.
+[Heading2] Key Flows
+Show the end-to-end experience (happy and unhappy paths) with design and engineering; the flows below are the agreed perimeter to fill in.
+[Heading3] Happy paths
+[ListParagraph] Owner creation (EU): open app → Continue with Google (or enter email + strong password) → name household → land in home space as Owner → optionally enable biometrics.
+[ListParagraph] Owner creation (Africa): open app → enter phone number → choose strong password → receive & enter 6-digit OTP → set display name & avatar colour → land in home space, Swahili UI.
+[ListParagraph] Returning sign-in: open app → biometric unlock (cached encrypted token) → home space; or email/phone + password → home space.
+[ListParagraph] Recovery: Forgot password → submit contact → receive single-use link/OTP → set new password → all other sessions signed out + notification.
+[Heading3] Unhappy paths
+[ListParagraph] Invalid credentials → single generic error (no field disclosure); after 5 failures → progressive rate-limit + optional step-up, never a permanent lock.
+[ListParagraph] Expired/reused OTP → clear “request a new code” action; further requests beyond 5/hour → throttled with explanation.
+[ListParagraph] Offline at sign-in → app opens to clearly-labelled cached (read-only if needed) state; credential changes queued until connectivity returns.
+[ListParagraph] Unverified contact → limited onboarding state; cannot invite members or store documents until verified.
+[ListParagraph] No reachable verified contact in recovery → routed to manual identity-verification support flow, not a dead end.
+[Heading2] Key Logic
+Rules that guide design and development, including non-functional requirements. Easier to state here than to infer from screens.
+[Heading3] Business & validation rules
+[ListParagraph] Household name: 2–60 chars, trimmed, no emoji/control chars. Display name: 1–40 chars; duplicates allowed with auto-disambiguator; profanity and reserved labels (“Admin”, “OmniKin”) blocked.
+[ListParagraph] Email = RFC 5322; phone = E.164; inline validation gates submission. Password ≥ 10 chars, breached-password check, confirm-match required.
+[ListParagraph] OTP = 6 digits, 10-min expiry, single-use, ≤ 5 requests/hour/contact. Password-reset link = 30-min expiry, single-use, invalidated by a newer one.
+[ListParagraph] Ownership cap: ≤ 3 households per email/phone (configurable). Failed sign-ins: progressive rate-limit after 5; no permanent lock without recovery.
+[ListParagraph] Enumeration safety: sign-in, reset and recovery all return identical responses regardless of whether the contact/account exists.
+[ListParagraph] Per-member identity is mandatory and cannot be disabled by an Owner; child accounts are parent-provisioned with GDPR-K defaults.
+[ListParagraph] Session model: long-lived refresh tokens are revocable server-side; revocation (incl. “sign out everywhere” and post-reset) invalidates tokens immediately; current session cannot be revoked without confirmation.
+[ListParagraph] Step-up: Document Organiser and Settings require a fresh biometric/passcode check within an active session; bulk data export requires MFA.
+[Heading3] Non-functional requirements
+[ListParagraph] Security — Argon2id/bcrypt salted hashing; no plaintext secrets anywhere; raw password never stored on device (only an encrypted, revocable token); minimum SSO scopes (identity + email).
+[ListParagraph] Privacy & compliance — GDPR / GDPR-K (EU) and NDPA / DPA / POPIA (Africa) aligned; privacy-by-design and by-default; audit-ready attribution of actions to individuals.
+[ListParagraph] Performance & reach — Owner setup < 2 min median; minimised, compressed auth payload within a byte budget; no asset re-download per sign-in; usable on low-end Android with intermittent data; offline-tolerant cached sessions.
+[ListParagraph] Accessibility & localisation — WCAG AA contrast; never colour-alone signalling; full localisation including RTL readiness and local languages such as Swahili; paste enabled for password managers.
+[ListParagraph] Reliability — High auth availability; OTP/SSO success-rate targets; no permanent lockout without recovery; graceful degradation offline.
+[Heading1] Development and Launch Planning
+[Heading2] Key Milestones
+Sequencing, not fixed dates. Security foundations and the EU beachhead land first; African-reach differentiators follow once the core is proven, consistent with the strategic “penetrate EU → develop product → develop African market” order.
+Milestone
+Scope
+Exit criteria
+M0 — Foundations
+Auth data model, individual-identity architecture, hashing, rate-limiting, enumeration-safe messaging.
+Security review passed; no plaintext secrets; per-member identity enforced at schema level.
+M1 — Core account & sign-in (EU beachhead)
+US-1.1.1–1.1.4, US-1.2.1; email + password, contact verification, owner creation.
+Owner setup < 2 min; sign-up completion instrumented; verification reliable.
+M2 — SSO, biometrics & MFA
+US-1.2.2–1.2.4; Google/Apple SSO, biometric unlock, optional MFA + backup codes.
+One-tap SSO live on iOS/Android; step-up on Documents/Settings; MFA enrolable.
+M3 — Recovery & sessions
+US-1.3.1–1.3.3; password reset, account recovery, session/device management.
+≥ 95% self-served resets in test; remote revocation invalidates tokens server-side.
+M4 — Differentiated reach
+US-1.4.1–1.4.2; phone-first OTP, cached/offline sessions, localisation incl. Swahili, payload minimisation.
+Phone+OTP first-class; app opens offline to cached state; payload within byte budget.
+M5 — Hardening & launch
+Pen-test, accessibility audit, load test, compliance sign-off, observability.
+WCAG AA verified; legal/DPO sign-off; guardrail metrics green; rollout plan approved.
+[Heading2] Operational Checklist
+[ListParagraph] Security review and penetration test of the authentication surface (sign-in, reset, recovery, sessions).
+[ListParagraph] Legal / DPO sign-off on GDPR-K and African data-protection alignment before any child-data processing.
+[ListParagraph] Provider setup: Google & Apple SSO apps configured; SMS/voice OTP provider and deliverability monitoring in place.
+[ListParagraph] Observability: dashboards for sign-up completion, sign-in success, OTP/SSO success, reset self-serve rate, lockouts, and abuse/rate-limit triggers.
+[ListParagraph] Abuse defences tuned: rate limits, invisible bot-check thresholds, OTP/SMS throttles.
+[ListParagraph] Support runbook for manual identity-verification recovery; escalation path defined.
+[ListParagraph] Localisation QA (incl. Swahili, RTL readiness); accessibility (WCAG AA) audit completed.
+[ListParagraph] Low-end-device and intermittent-connectivity testing for the African reach paths.
+[ListParagraph] Rollback and incident-response plan; on-call coverage for launch.
+[Heading2] Other
+[ListParagraph] Dependencies: Feature 2 (Roles & Permissions) consumes the individual identities and Owner role; Feature 14 (Privacy & Compliance) provides the consent/GDPR-K engine that Feature 1’s child-provisioning defaults plug into; Feature 11 (Document Organiser) and Feature 13 (Settings) rely on the step-up checks defined here.
+[ListParagraph] Decisions to confirm: final OTP/lockout/expiry constants; chosen hashing parameters; auth payload byte budget; CAPTCHA risk thresholds.
+[ListParagraph] Instrumentation owner and analytics event schema to be agreed before M1 so goals and guardrails are measurable from first release.
+[Heading1] Roadmap — Deliverables per story
+Each of the fifteen user stories mapped to its delivery milestone, with the concrete deliverable that marks it done. Sequencing reflects security-first foundations, an EU core, then the African-reach differentiators.
+Story
+Title
+Milestone
+Key deliverable
+US-1.1.1
+Create household & owner account
+M1
+Sign-up screen + Owner provisioning; household entity; abuse rate-limit & bot-check.
+US-1.1.2
+Personal display name / username
+M1
+Profile step; avatar-colour picker with uniqueness; denylist filter.
+US-1.1.3
+Enforce password strength
+M0–M1
+Strength meter + breached-password check; Argon2id/bcrypt hashing; show/hide & paste enabled.
+US-1.1.4
+Verify email or phone
+M1
+OTP/magic-link service; verification screen; throttling; limited-onboarding gate.
+US-1.2.1
+Sign in with email/phone + password
+M1
+Sign-in flow; enumeration-safe error; progressive lockout; revocable refresh token.
+US-1.2.2
+SSO (Google, Apple)
+M2
+Google/Apple SSO; account linking with confirmation; minimal scopes; relay-email support.
+US-1.2.3
+Biometric / device unlock
+M2
+Biometric opt-in; encrypted local token; passcode fallback; step-up on Documents/Settings.
+US-1.2.4
+Step up to MFA
+M2
+TOTP + SMS/voice enrolment; backup codes; export-gated MFA; OTP throttle parity.
+US-1.3.1
+Reset forgotten password
+M3
+Reset link/OTP (30-min, single-use); enumeration-safe; global sign-out + notification.
+US-1.3.2
+Recover forgotten account / email
+M3
+Recovery via linked phone/SSO; no account disclosure; manual-verification fallback flow.
+US-1.3.3
+View & revoke sessions/devices
+M3
+Security screen (device, location, last-active); per-session & sign-out-everywhere; server-side revoke.
+US-1.4.1 ★
+Per-member individual credentials
+M0/M4
+Identity-per-member enforced in schema; action attribution/audit; GDPR-K child-provisioning defaults.
+US-1.4.2 ★
+Low-bandwidth & cached sign-in
+M4
+Phone-first OTP path; encrypted cached/offline session; payload minimisation; Swahili/RTL localisation.
+★ Differentiator stories (Epic 1.4). Milestone colours mirror the epic sequencing: foundations/EU core (teal), SSO & security (interactive teal), recovery (cornflower), African-reach differentiators (green).
+[Heading1] Appendix
+[Heading2] FAQ
+[ListParagraph] Why not a single shared household password like Cozi? Because it structurally prevents per-member roles, child-data consent and audit logging — the privacy capabilities that differentiate OmniKin and are required under GDPR-K.
+[ListParagraph] Do children get their own logins? Yes — every member including children has a distinct credential; child accounts are provisioned by a parent/guardian and inherit GDPR-K-compliant defaults (Feature 14).
+[ListParagraph] What if a user has no email? Phone-number-plus-OTP is a first-class sign-in path, not a fallback — central to African-market reach.
+[ListParagraph] What happens offline? The app opens to a clearly-labelled cached (read-only if needed) state without a network round-trip; credential changes queue until connectivity returns.
+[ListParagraph] Is MFA mandatory? It is strongly encouraged for the Owner and required before any bulk data export; an app-based factor is always offered so SMS is not the only option.
+[ListParagraph] Can an Owner simplify login by turning off individual identities? No — that would break consent and audit guarantees and is explicitly disallowed.
+[Heading2] Risks
+Risk
+Severity
+Mitigation
+Per-member setup adds friction vs Cozi’s one shared password
+Medium
+Keep owner flow < 2 min; SSO one-tap; make the privacy/child-safety benefit explicit in onboarding.
+GDPR-K / DSA non-compliance in child onboarding
+High
+Privacy-by-design; parent-provisioned child accounts; DPO sign-off before any child-data processing (Feature 14).
+OTP/SMS cost and deliverability in African markets
+Medium
+Throttle and reuse-protect; minimise payload; explore network-based verification; monitor deliverability.
+Account enumeration / credential-stuffing
+High
+Generic responses everywhere; progressive rate-limiting; breached-password checks; invisible bot-check.
+Offline caching weakens token security
+Medium
+Encrypted, revocable tokens only; server-side revocation; step-up on sensitive areas.
+SSO provider dependency / outage
+Medium
+Always offer password and phone paths; recovery never depends on a single provider.
+Low-end-device performance
+Medium
+Lightweight assets; minimised auth payload; test on sub-$60 Android and intermittent data.
+[Heading2] Source & references
+[ListParagraph] OmniKin Feature Specification — Feature 1 (Epics 1.1–1.4), the source of all user stories and acceptance criteria captured here.
+[ListParagraph] OmniKin Strategic Market Analysis (June 2026) — market, competitive and regulatory context.
+[ListParagraph] OmniKin Style Guide v1.0 — colour, typography and component rules applied to this document.
+Quantities such as character limits and time windows are sensible defaults for refinement, not final commitments. Competitor and regulatory details reflect public information as of mid-2026 and should be re-validated before build or investment decisions.
