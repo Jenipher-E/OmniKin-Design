@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blog · OmniKin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>.filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:34px}.filters button{font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid var(--hair);background:#fff;color:var(--slate);cursor:pointer;transition:all .18s ease}.filters button:hover{border-color:var(--teal300);color:var(--teal700)}.filters button[aria-pressed=true]{background:var(--teal700);border-color:var(--teal700);color:#fff}.post.hide{display:none}</style>
+</head>
+<body data-page="blog.html">
+<div data-head></div>
+
+<section class="phead">
+<div class="wrap">
+<p class="eyebrow rv">Blog</p>
+<h1 class="rv" style="max-width:18em">Notes on building calm household software.</h1>
+<p class="lead rv">Product thinking, engineering decisions and what we learn from the households testing OmniKin. Written as we go, including the parts that did not work.</p>
+</div>
+</section>
+
+<section>
+<div class="wrap">
+<a class="card feature-post rv" href="post.html" style="margin-bottom:46px">
+<div class="thumb" style="background:#E4F0F1;display:flex;align-items:center;justify-content:center"><span data-icon="people" data-size="76" data-tone="#74B7C0" style="display:flex"></span></div>
+<div class="pbody">
+<span class="badge badge-next">Featured</span>
+<h3 style="font-size:27px;color:#1C6E78;margin-top:14px;letter-spacing:-.02em">Why we measure the mental load, and refuse to score it</h3>
+<p style="color:#586A6D;margin-top:14px;font-size:16.5px">The fair-load view is the most-discussed screen in OmniKin, and the one we rewrote most often. Here is how we ended up with something that shows a household the truth without turning chores into a leaderboard.</p>
+<p class="meta" style="margin-top:20px">12 June 2026 · 8 min read</p>
+</div>
+</a>
+
+<div class="filters rv" role="group" aria-label="Filter posts">
+<button type="button" data-f="all" aria-pressed="true">All posts</button>
+<button type="button" data-f="product" aria-pressed="false">Product thinking</button>
+<button type="button" data-f="eng" aria-pressed="false">Engineering</button>
+<button type="button" data-f="privacy" aria-pressed="false">Privacy</button>
+<button type="button" data-f="field" aria-pressed="false">From the field</button>
+</div>
+
+<div class="grid g3" id="posts">
+<a class="card post rv" data-cat="eng" href="post.html"><div class="thumb" style="background:#E6EDF3;display:flex;align-items:center;justify-content:center"><span data-icon="offline" data-size="44" data-tone="#7FA8D0" style="display:flex"></span></div><div class="pbody"><span class="badge badge-explore">Engineering</span><h3>Designing for the connection you actually have</h3><p>Offline is a state, not an error. What it took to make the app open instantly with no network round-trip.</p><p class="meta" style="margin-top:auto">4 June 2026 · 6 min read</p></div></a>
+<a class="card post rv" data-cat="privacy" href="post.html"><div class="thumb" style="background:#E1F1E7;display:flex;align-items:center;justify-content:center"><span data-icon="lock" data-size="44" data-tone="#7FC49D" style="display:flex"></span></div><div class="pbody"><span class="badge badge-explore">Privacy</span><h3>What a shared household password really costs you</h3><p>One login for the whole family looks convenient. It quietly removes roles, child protection and any real audit trail.</p><p class="meta" style="margin-top:auto">28 May 2026 · 5 min read</p></div></a>
+<a class="card post rv" data-cat="product" href="post.html"><div class="thumb" style="background:#FBE7DD;display:flex;align-items:center;justify-content:center"><span data-icon="lists" data-size="44" data-tone="#E89B77" style="display:flex"></span></div><div class="pbody"><span class="badge badge-explore">Product thinking</span><h3>The out-of-stock problem nobody solved</h3><p>A list that cannot handle an empty shelf is not finished. Suggested swaps, parked items, and telling the person who asked.</p><p class="meta" style="margin-top:auto">21 May 2026 · 7 min read</p></div></a>
+<a class="card post rv" data-cat="field" href="post.html"><div class="thumb" style="background:#E4F0F1;display:flex;align-items:center;justify-content:center"><span data-icon="globe" data-size="44" data-tone="#74B7C0" style="display:flex"></span></div><div class="pbody"><span class="badge badge-explore">From the field</span><h3>Two weeks of testing in Lagos and Berlin</h3><p>The same app, two very different weeks. What changed in the design after we watched both.</p><p class="meta" style="margin-top:auto">14 May 2026 · 9 min read</p></div></a>
+<a class="card post rv" data-cat="product" href="post.html"><div class="thumb" style="background:#E6EDF3;display:flex;align-items:center;justify-content:center"><span data-icon="bell" data-size="44" data-tone="#7FA8D0" style="display:flex"></span></div><div class="pbody"><span class="badge badge-explore">Product thinking</span><h3>One digest instead of forty notifications</h3><p>Why OmniKin sends less than it could, and how quiet hours became a household setting rather than a personal one.</p><p class="meta" style="margin-top:auto">7 May 2026 · 4 min read</p></div></a>
+<a class="card post rv" data-cat="eng" href="post.html"><div class="thumb" style="background:#E1F1E7;display:flex;align-items:center;justify-content:center"><span data-icon="phone" data-size="44" data-tone="#7FC49D" style="display:flex"></span></div><div class="pbody"><span class="badge badge-explore">Engineering</span><h3>Shipping to a sub-100 dollar Android</h3><p>Our performance budget, the fonts and assets it rules out, and what we gave up to keep the app light.</p><p class="meta" style="margin-top:auto">30 April 2026 · 6 min read</p></div></a>
+</div>
+</div>
+</section>
+
+<section class="canvas tight">
+<div class="wrap narrow" style="text-align:center">
+<h2 class="rv">One short letter a month.</h2>
+<p class="lead rv" style="margin:16px auto 0;max-width:30em">What we shipped, what we learned, what is next. Nothing else, and one click to leave.</p>
+<form class="rv" data-fake style="max-width:440px;margin:26px auto 0">
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<input type="email" required placeholder="you@example.com" aria-label="Email address" style="flex:1;min-width:200px;font:inherit;font-size:15px;padding:13px 14px;border:1px solid var(--hair);border-radius:9px;background:#fff">
+<button class="btn btn-cta" type="submit">Subscribe</button>
+</div>
+<div class="sent" style="margin-top:16px;text-align:left">Thank you. Check your inbox to confirm. This is a prototype, so nothing was actually sent.</div>
+</form>
+</div>
+</section>
+
+<div data-foot></div>
+<script src="site.js"></script>
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  const f=b.dataset.f;
+  document.querySelectorAll('.filters button').forEach(o=>o.setAttribute('aria-pressed',o===b));
+  document.querySelectorAll('#posts .post').forEach(p=>p.classList.toggle('hide',f!=='all'&&p.dataset.cat!==f));
+}));
+</script>
+</body>
+</html>

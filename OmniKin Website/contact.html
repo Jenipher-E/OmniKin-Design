@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact us · OmniKin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>.contact-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:start}@media(max-width:940px){.contact-grid{grid-template-columns:1fr;gap:40px}}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:560px){.two{grid-template-columns:1fr}}.info{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--hair)}.info:last-child{border-bottom:0}.info h4{font-size:15.5px;color:#14525B}.info p{font-size:14.5px;color:var(--slate);margin-top:4px}</style>
+</head>
+<body data-page="contact.html">
+<div data-head></div>
+
+<section class="phead">
+<div class="wrap">
+<p class="eyebrow rv">Contact us</p>
+<h1 class="rv" style="max-width:17em">Tell us about your household.</h1>
+<p class="lead rv">Waitlist, partnerships, press or a question about how we handle data. A person reads everything that arrives here and usually replies within two working days.</p>
+</div>
+</section>
+
+<section id="waitlist">
+<div class="wrap contact-grid">
+<form class="form-card rv" data-fake>
+<h3 style="font-size:22px;color:#1C6E78">Join the waitlist</h3>
+<p class="body-lg" style="font-size:15.5px;margin:10px 0 26px">We open early access region by region. Tell us where you are and which module would help most, and we will let you know when OmniKin reaches you.</p>
+<div class="two">
+<div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" required placeholder="Jeni Vogel"></div>
+<div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="you@example.com"></div>
+</div>
+<div class="two">
+<div class="field"><label for="country">Where are you?</label><input id="country" name="country" type="text" placeholder="Berlin, Germany"></div>
+<div class="field"><label for="size">Household size</label><select id="size" name="size"><option>1 to 2 people</option><option selected>3 to 4 people</option><option>5 to 6 people</option><option>7 or more</option></select></div>
+</div>
+<div class="field"><label for="module">Which module would help your week most?</label><select id="module" name="module"><option>Shopping lists</option><option selected>Tasks and chores</option><option>Shared calendar</option><option>Location sharing, Find my Family</option><option>Budgets and expenses</option><option>Meal and family recipe</option><option>Timetable</option><option>Document organiser</option></select></div>
+<div class="field"><label for="msg">Anything else? Optional.</label><textarea id="msg" name="msg" placeholder="What does your household struggle with most right now?"></textarea></div>
+<div class="btn-row"><button class="btn btn-cta" type="submit">Join the waitlist</button><span class="meta" style="max-width:20em">One email when your region opens. No marketing drip.</span></div>
+<div class="sent" style="margin-top:22px">You are on the list. We will be in touch when early access reaches your region. This is a prototype, so nothing was actually submitted.</div>
+</form>
+
+<div>
+<div class="card rv">
+<h3 style="font-size:20px">Other ways to reach us</h3>
+<div style="margin-top:12px">
+<div class="info"><span data-icon="mail" data-size="20" data-tone="#2A8C99" style="display:flex;padding-top:2px"></span><div><h4>General and support</h4><p>hello@omnikin.app</p></div></div>
+<div class="info"><span data-icon="people" data-size="20" data-tone="#2A8C99" style="display:flex;padding-top:2px"></span><div><h4>Partnerships and pilots</h4><p>partners@omnikin.app</p></div></div>
+<div class="info"><span data-icon="shield" data-size="20" data-tone="#2A8C99" style="display:flex;padding-top:2px"></span><div><h4>Privacy and data requests</h4><p>privacy@omnikin.app</p></div></div>
+<div class="info"><span data-icon="clock" data-size="20" data-tone="#2A8C99" style="display:flex;padding-top:2px"></span><div><h4>Response time</h4><p>Within two working days, Monday to Friday.</p></div></div>
+</div>
+</div>
+
+<div class="card rv" style="margin-top:22px;background:#F6FAFA">
+<h4 style="font-size:16.5px;color:#14525B">Where we work</h4>
+<p style="margin-top:8px;font-size:15px;color:var(--slate)">OmniKin is built for the European Union and for Africa at the same time. If you are in a market we have not reached yet, tell us. It genuinely affects the order we open in.</p>
+</div>
+
+<div class="diff rv" style="margin-top:22px">
+<span class="badge badge-live">What we do with this</span>
+<p>Your details are used to contact you about early access and nothing else. No advertising, no profiling, no passing your address to anyone. Ask us to delete it at any time and we will.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="canvas tight">
+<div class="wrap">
+<div class="sec-head rv" style="margin-bottom:30px"><p class="eyebrow">Common questions</p><h2 style="font-size:30px">Before you write</h2></div>
+<div class="grid g2">
+<div class="card rv"><h4 style="font-size:16.5px;color:#14525B">When does OmniKin launch?</h4><p style="margin-top:8px">Early access opens region by region through 2026, foundations first. The <a href="modules.html">upcoming modules</a> page always shows the current order.</p></div>
+<div class="card rv"><h4 style="font-size:16.5px;color:#14525B">What does it cost?</h4><p style="margin-top:8px">Free to start, with a household subscription for the fuller set of modules. No advertising tier, because there will not be any advertising.</p></div>
+<div class="card rv"><h4 style="font-size:16.5px;color:#14525B">Do children get their own logins?</h4><p style="margin-top:8px">Yes. Every member has a distinct credential. Children's accounts are set up by a parent or guardian and start with protective defaults.</p></div>
+<div class="card rv"><h4 style="font-size:16.5px;color:#14525B">What if I have no email address?</h4><p style="margin-top:8px">Phone number with a 6-digit code is a full sign-in path, not a fallback. It matters for reach, so we treat it as a first-class route.</p></div>
+</div>
+</div>
+</section>
+
+<div data-foot></div>
+<script src="site.js"></script>
+</body>
+</html>
